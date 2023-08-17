@@ -1,41 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>THE BRAND JSON VISUALIZATION</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 0;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .post {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-
-        .post h2 {
-            font-size: 20px;
-            margin: 0 0 10px;
-        }
-
-        .post p {
-            margin: 5px 0;
-        }
-
-        .post img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-        }
-    </style>
+    <title>JSON Visualization</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <?php
@@ -48,26 +16,34 @@ if ($data && isset($data['category']) && isset($data['posts'])) {
     $category = $data['category'];
     $posts = $data['posts'];
 
-    echo '<h1>Category: ' . $category['name'] . '</h1>';
+    echo '<div class="container mt-4">';
+    echo '<h1 class="mb-4">Category: ' . $category['name'] . '</h1>';
     
     foreach ($posts as $post) {
-        echo '<div class="post">';
-        echo '<h2>' . $post['title'] . '</h2>';
-        echo '<p><strong>Keywords:</strong> ' . $post['keywords'] . '</p>';
-        echo '<p><strong>Created at:</strong> ' . $post['created_at'] . '</p>';
-        echo '<p><strong>Category:</strong> ' . $post['category_name'] . '</p>';
+        echo '<div class="card mb-4">';
+        echo '<div class="card-body">';
+        echo '<h2 class="card-title">' . $post['title'] . '</h2>';
+        echo '<p class="card-text"><strong>Keywords:</strong> ' . $post['keywords'] . '</p>';
+        echo '<p class="card-text"><strong>Created at:</strong> ' . $post['created_at'] . '</p>';
+        echo '<p class="card-text"><strong>Category:</strong> ' . $post['category_name'] . '</p>';
         
         // Display the images using the provided image URLs
         $imageDefault = $post['image_default'];
         if (!empty($imageDefault)) {
-            echo '<img src="https://www.thebrand.ai/i/' . $imageDefault . '" alt="Image">';
+            echo '<img src="https://www.thebrand.ai/i/' . $imageDefault . '" alt="Image" class="img-fluid">';
         }
         
         echo '</div>';
+        echo '</div>';
     }
+    echo '</div>';
 } else {
     echo '<p style="color: red;">Invalid JSON data.</p>';
 }
 ?>
+
+<!-- Include Bootstrap JS and jQuery (required for some Bootstrap features) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
